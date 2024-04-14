@@ -17,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Promedios extends javax.swing.JFrame {
     LinkedList notas = new LinkedList<>();  
+    String nombre="";
     int est, not;
-    
     /**
      * Creates new form NewJFrame
      */
@@ -229,7 +229,6 @@ public class Promedios extends javax.swing.JFrame {
 
     private void mostrarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarHistoricoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String nombre="";
         int noes=0;
         notas.removeAll(notas);
         for (int i = 0; i < model.getRowCount(); i++) {
