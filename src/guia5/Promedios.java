@@ -11,10 +11,14 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author manuel
+ * TO DO:
+ * -agregar las graficas del historico
+ * -agregar la importacion de excel
  */
 public class Promedios extends javax.swing.JFrame {
-    LinkedList<String> nombre = new LinkedList<>();
-    LinkedList<Double> notas = new LinkedList<>();    
+    LinkedList notas = new LinkedList<>();  
+    int est, not;
+    
     /**
      * Creates new form NewJFrame
      */
@@ -31,8 +35,6 @@ public class Promedios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        numNotas = new javax.swing.JTextField();
-        numEst = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -40,6 +42,13 @@ public class Promedios extends javax.swing.JFrame {
         crearTabla = new javax.swing.JButton();
         numeroEst = new javax.swing.JTextArea();
         numeroNot = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaDefinitivas = new javax.swing.JTable();
+        calcularDefinitivas = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        nombreEst = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        mostrarHistorico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +68,7 @@ public class Promedios extends javax.swing.JFrame {
 
         jLabel2.setText("Cantidad de notas: ");
 
-        crearTabla.setText("jButton1");
+        crearTabla.setText("Crear Tabla");
         crearTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crearTablaActionPerformed(evt);
@@ -72,35 +81,102 @@ public class Promedios extends javax.swing.JFrame {
         numeroNot.setColumns(20);
         numeroNot.setRows(5);
 
+        tablaDefinitivas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Definitiva", "Resultado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaDefinitivas);
+
+        calcularDefinitivas.setText("Calcular Definitivas");
+        calcularDefinitivas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        calcularDefinitivas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcularDefinitivasActionPerformed(evt);
+            }
+        });
+
+        nombreEst.setColumns(20);
+        nombreEst.setRows(5);
+        nombreEst.setToolTipText("Nombre estudiante");
+
+        jLabel3.setText("Nombre estudiante:");
+
+        mostrarHistorico.setText("Mostrar Historico");
+        mostrarHistorico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarHistoricoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(numeroEst, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(crearTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(87, 87, 87)))))
-                .addGap(267, 267, 267))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(numeroEst, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(crearTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(calcularDefinitivas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(428, 428, 428))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -110,24 +186,72 @@ public class Promedios extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
-                    .addComponent(crearTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 293, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(crearTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(calcularDefinitivas, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearTablaActionPerformed
-        nombre.add("");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int est = parseInt(numeroEst.getText());
-        int not = parseInt(numeroNot.getText());
+        est = parseInt(numeroEst.getText());
+        not = parseInt(numeroNot.getText());
         model.addColumn("Nombre");
         model.setRowCount(est);
         for (int i = 1; i < not+1; i++) {
             model.addColumn("Nota:" + i);
         }
     }//GEN-LAST:event_crearTablaActionPerformed
+
+    private void calcularDefinitivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularDefinitivasActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            double suma=0;
+            String nombre = model.getValueAt(i, 0).toString();
+            //obtiene los datos y calcula la definitiva para ponerla en la tabla
+            for (int j = 1; j < model.getColumnCount(); j++) {
+                double nota = Double.parseDouble(model.getValueAt(i, j).toString());
+                suma += nota;
+            }
+            double definitiva = suma / (model.getColumnCount()-1);
+            String paso = (definitiva >= 3.0) ? "APROBO" : "REPROBO";
+            definitivas.addRow(new Object[]{nombre, definitiva, paso});
+        }
+    }//GEN-LAST:event_calcularDefinitivasActionPerformed
+
+    private void mostrarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarHistoricoActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String nombre="";
+        int noes=0;
+        notas.removeAll(notas);
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 0).toString().equals(nombreEst.getText())) {
+                nombre=model.getValueAt(i, 0).toString();
+                for (int j = 1; j <= model.getRowCount(); j++) {
+                    notas.add(model.getValueAt(i, j));
+                }
+            }else
+                noes++;
+            if (noes==model.getRowCount()) {
+                MensajeError menErr = new MensajeError(this, true);
+                menErr.setVisible(true);
+                nombreEst.setText("");
+            }
+        }
+        System.out.println(notas);
+        System.out.println(nombre);
+        //alejo ya aca le queda el nombre del estudiante en la variable estudiante
+        //y las notas de ese estudiante en la lista notas
+        //ya es que haga esa monda de las graficas 
+    }//GEN-LAST:event_mostrarHistoricoActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -165,14 +289,19 @@ public class Promedios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton calcularDefinitivas;
     private javax.swing.JButton crearTabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField numEst;
-    private javax.swing.JTextField numNotas;
+    private javax.swing.JButton mostrarHistorico;
+    private javax.swing.JTextArea nombreEst;
     private javax.swing.JTextArea numeroEst;
     private javax.swing.JTextArea numeroNot;
+    private javax.swing.JTable tablaDefinitivas;
     // End of variables declaration//GEN-END:variables
 }
