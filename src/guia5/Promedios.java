@@ -7,6 +7,12 @@ package guia5;
 import static java.lang.Integer.parseInt;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -35,6 +41,7 @@ public class Promedios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        datosTabla = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -49,6 +56,7 @@ public class Promedios extends javax.swing.JFrame {
         nombreEst = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         mostrarHistorico = new javax.swing.JButton();
+        importExc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +128,13 @@ public class Promedios extends javax.swing.JFrame {
             }
         });
 
+        importExc.setText("Importar excel");
+        importExc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importExcActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -131,7 +146,9 @@ public class Promedios extends javax.swing.JFrame {
                     .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(importExc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +160,9 @@ public class Promedios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(mostrarHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                            .addComponent(importExc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
 
@@ -154,7 +173,7 @@ public class Promedios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +269,28 @@ public class Promedios extends javax.swing.JFrame {
         //alejo ya aca le queda el nombre del estudiante en la variable estudiante
         //y las notas de ese estudiante en la lista notas
         //ya es que haga esa monda de las graficas 
+        
     }//GEN-LAST:event_mostrarHistoricoActionPerformed
+
+    private void importExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importExcActionPerformed
+        JFileChooser escogerArchivo = new JFileChooser();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String Direccion="";
+        int returnValue = escogerArchivo.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File archivoDir = escogerArchivo.getSelectedFile();
+            System.out.println(archivoDir.getAbsolutePath());
+            Direccion = archivoDir.getAbsolutePath();
+        }
+        File archivo = new File(Direccion);
+        try {
+            Scanner entrada= new Scanner(archivo); // objeto para procesar información
+            while(entrada.hasNext()){
+            //logica para crear jTable1 de model
+            }} catch (FileNotFoundException ex) {
+            Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_importExcActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -290,6 +330,8 @@ public class Promedios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton calcularDefinitivas;
     private javax.swing.JButton crearTabla;
+    private javax.swing.JFileChooser datosTabla;
+    private javax.swing.JButton importExc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
