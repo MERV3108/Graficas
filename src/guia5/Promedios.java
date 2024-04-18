@@ -231,12 +231,18 @@ public class Promedios extends javax.swing.JFrame {
 
     private void crearTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearTablaActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        try{
         est = parseInt(numeroEst.getText());
         not = parseInt(numeroNot.getText());
         model.addColumn("Nombre");
         model.setRowCount(est);
         for (int i = 1; i < not+1; i++) {
             model.addColumn("Nota:" + i);
+        }
+        }catch(Exception e){
+            System.out.println("Hubo un problema al crear la tabla");
+            numeroEst.setText("");
+            numeroNot.setText("");
         }
     }//GEN-LAST:event_crearTablaActionPerformed
 
@@ -254,6 +260,7 @@ public class Promedios extends javax.swing.JFrame {
             double definitiva = suma / (model.getColumnCount()-1);
             String paso = (definitiva >= 3.0) ? "APROBO" : "REPROBO";
             definitivas.addRow(new Object[]{nombre, definitiva, paso});
+            System.out.println(definitivas.getValueAt(0, 0));
         }
     }//GEN-LAST:event_calcularDefinitivasActionPerformed
 
@@ -275,8 +282,8 @@ public class Promedios extends javax.swing.JFrame {
                 nombreEst.setText("");
             }
         }
-        System.out.println(notas);
-        System.out.println(nombre);
+        //System.out.println(notas);
+        //System.out.println(nombre);
         //alejo ya aca le queda el nombre del estudiante en la variable estudiante
         //y las notas de ese estudiante en la lista notas
         //ya es que haga esa monda de las graficas 
