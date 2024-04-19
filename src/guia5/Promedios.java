@@ -249,6 +249,7 @@ public class Promedios extends javax.swing.JFrame {
     private void calcularDefinitivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularDefinitivasActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();
+        try{
         for (int i = 0; i < model.getRowCount(); i++) {
             double suma=0;
             String nombre = model.getValueAt(i, 0).toString();
@@ -261,6 +262,9 @@ public class Promedios extends javax.swing.JFrame {
             String paso = (definitiva >= 3.0) ? "APROBO" : "REPROBO";
             definitivas.addRow(new Object[]{nombre, definitiva, paso});
             System.out.println(definitivas.getValueAt(0, 0));
+        }
+        }catch(Exception e){
+            System.out.println("Hubo un problema al calcular definitivas");
         }
     }//GEN-LAST:event_calcularDefinitivasActionPerformed
 
