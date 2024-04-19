@@ -13,14 +13,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Graficas {
-
-    /**
-     * @param args
-     */
-    public static void main (String [] args){
-        
-    }
-    public static void CrearGuardarGrafica(String nombre, LinkedList<Double> notas, int guardar){
+    public static void CrearGuardarGrafica(String nombre, LinkedList<Double> notas, Boolean guardar){
         
         // Create a simple Bar chart
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -33,29 +26,34 @@ public class Graficas {
         false, true, false);
 
         try {
-            ChartUtilities.saveChartAsJPEG(new File("D:\\ALEJO\\Documents\\Estudiante.jpg"), chart, 500, 300);
+            ChartUtilities.saveChartAsJPEG(new File("imagenes/Estudiante.jpg"), chart, 500, 300);
         } 
         catch (IOException e) {
-            System.err.println("Problem occurred creating chart.");
-        }
-        //actualicacion de imagen
-        if (guardar==1){
-            SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        Date Datos = new Date();
-        String strDate = Formato.format(Datos);
-        String GuarNombre = "D:\\ALEJO\\Documents\\Estudiante " + nombre + ".jpg";
-        try {
-            ChartUtilities.saveChartAsJPEG(new File(GuarNombre), chart, 500, 300);
-            System.out.println("Gráfico guardado como: " + GuarNombre);
-        } catch (IOException e) {
-            System.err.println("Ocurrió un problema al crear el gráfico.");
+            System.err.println("Hubo un problema al generar la grafica.");
             e.printStackTrace();
         }
-        }
-        else{
-            //nada xd
+        //actualicacion de imagen
+        if (guardar) {
+            String userHome = System.getProperty("user.home");
+            SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            Date Datos = new Date();
+            String strDate = Formato.format(Datos);
+            String GuarNombre = userHome + "\\Pictures\\Historico de " + nombre + strDate + ".jpg";
+            try {
+                ChartUtilities.saveChartAsJPEG(new File(GuarNombre), chart, 500, 300);
+                System.out.println("Gráfico guardado como: " + GuarNombre);
+            } catch (IOException e) {
+                System.err.println("Ocurrió un problema al crear el gráfico.");
+                e.printStackTrace();
+            }
         }
 
     }
-  
+    public static void torta(double paso, double reprobo, double total){
+        double porPaso=0, porRepro=0;//porcentajes
+        porPaso=(paso/total);//si necesita el numero en porcentajes multiplique por 100
+        porRepro=(reprobo/total);
+        //System.out.println(porPaso);
+        //System.out.println(porRepro);
+    }
 }
