@@ -25,6 +25,8 @@ public class Promedios extends javax.swing.JFrame {
     LinkedList notas = new LinkedList<>();  
     String nombre="";
     int est, not;
+    int aceptar = 1;
+    int guardar = 0;
     /**
      * Creates new form NewJFrame
      */
@@ -122,6 +124,11 @@ public class Promedios extends javax.swing.JFrame {
         });
 
         export.setText("Exportar Tabla");
+        export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -271,12 +278,19 @@ public class Promedios extends javax.swing.JFrame {
     private void mostrarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarHistoricoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int noes=0;
+        
         notas.removeAll(notas);
         for (int i = 0; i < model.getRowCount(); i++) {
             if (model.getValueAt(i, 0).toString().equals(nombreEst.getText())) {
                 nombre=model.getValueAt(i, 0).toString();
-                for (int j = 1; j <= model.getRowCount(); j++) {
-                    notas.add(model.getValueAt(i, j));
+                for (int j = 1; j < model.getColumnCount(); j++) {//cambie el for para poder pasar notas de string a double
+                    try{
+                        Double valor = Double.parseDouble(model.getValueAt(i, j).toString());
+                        notas.add(valor);
+                    }
+                    catch(NumberFormatException e){
+                         e.printStackTrace();
+                    }
                 }
             }else
                 noes++;
@@ -286,11 +300,9 @@ public class Promedios extends javax.swing.JFrame {
                 nombreEst.setText("");
             }
         }
+       Graficas.CrearGuardarGrafica(nombre, notas,guardar); //los datos viajan al main para generar la imagen
         //System.out.println(notas);
-        //System.out.println(nombre);
-        //alejo ya aca le queda el nombre del estudiante en la variable estudiante
-        //y las notas de ese estudiante en la lista notas
-        //ya es que haga esa monda de las graficas 
+        //System.out.println(nombre)
         
     }//GEN-LAST:event_mostrarHistoricoActionPerformed
 
@@ -326,6 +338,11 @@ public class Promedios extends javax.swing.JFrame {
             Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_importExcActionPerformed
+
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
+    guardar = aceptar;
+    Graficas.CrearGuardarGrafica(nombre, notas,guardar);// TODO add your handling code here:
+    }//GEN-LAST:event_exportActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -361,6 +378,7 @@ public class Promedios extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton calcularDefinitivas;
