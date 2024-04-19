@@ -7,12 +7,14 @@ package guia5;
 import static java.lang.Integer.parseInt;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileFilter;
+import java.io.File;
 
 /**
  *
@@ -62,6 +64,28 @@ public class Promedios extends javax.swing.JFrame {
         guardarGrafico = new javax.swing.JCheckBox();
         GraficoTorta = new javax.swing.JButton();
         borrTab = new javax.swing.JButton();
+
+        datosTabla.setBackground(java.awt.Color.lightGray);
+        try {
+            // Establecer el Look and Feel del sistema
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        FileFilter filter = new FileFilter() {
+            public boolean accept(File file) {
+                // Aceptar todos los directorios y archivos .csv
+                return file.isDirectory() || file.getName().toLowerCase().endsWith(".csv");
+            }
+        
+            public String getDescription() {
+                // Descripción del filtro
+                return "Archivos CSV (*.csv)";
+            }
+        };
+        
+        // Aplicar el filtro al JFileChooser
+        datosTabla.setFileFilter(filter);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -370,34 +394,33 @@ public class Promedios extends javax.swing.JFrame {
     private void importExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importExcActionPerformed
         JFileChooser escogerArchivo = new JFileChooser();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String Direccion="";
         String linea;
         String[] estudiantes;
         Boolean primera = false;
+        
+        //obtiene direccion del archivo
         int returnValue = escogerArchivo.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File archivoDir = escogerArchivo.getSelectedFile();
-            System.out.println(archivoDir.getAbsolutePath());
-            Direccion = archivoDir.getAbsolutePath();
-        }
-        File archivo = new File(Direccion);
-        try {
-            Scanner entrada= new Scanner(archivo); // objeto para procesar información
-            while(entrada.hasNext()){
-            linea=entrada.nextLine();
-            estudiantes=linea.split(";");
-            if(!primera){
-                model.addColumn("Nombre:");
-                for (int i = 1; i < estudiantes.length; i++) {
-                    model.addColumn("Nota " + i);
+            File archivo = escogerArchivo.getSelectedFile();
+            try {
+                //ingresa archivo a tabla
+                Scanner entrada = new Scanner(archivo); // objeto para procesar información
+                while (entrada.hasNext()) {
+                    linea = entrada.nextLine();
+                    estudiantes = linea.split(";");
+                    if (!primera) {
+                        model.addColumn("Nombre:");
+                        for (int i = 1; i < estudiantes.length; i++) {
+                            model.addColumn("Nota " + i);
+                        }
+                        primera = true;
+                    }
+                    model.addRow(estudiantes);
                 }
-                primera=true;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
-            model.addRow(estudiantes);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
         }
     }//GEN-LAST:event_importExcActionPerformed
 

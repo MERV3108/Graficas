@@ -3,6 +3,14 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JFileChooser" name="datosTabla">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c0" green="c0" id="lightGray" palette="1" red="c0" type="palette"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try {&#xa;    // Establecer el Look and Feel del sistema&#xa;    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());&#xa;} catch (Exception ex) {&#xa;    ex.printStackTrace();&#xa;}&#xa;FileFilter filter = new FileFilter() {&#xa;    public boolean accept(File file) {&#xa;        // Aceptar todos los directorios y archivos .csv&#xa;        return file.isDirectory() || file.getName().toLowerCase().endsWith(&quot;.csv&quot;);&#xa;    }&#xa;&#xa;    public String getDescription() {&#xa;        // Descripci&#xf3;n del filtro&#xa;        return &quot;Archivos CSV (*.csv)&quot;;&#xa;    }&#xa;};&#xa;&#xa;// Aplicar el filtro al JFileChooser&#xa;datosTabla.setFileFilter(filter);"/>
+      </AuxValues>
     </Component>
   </NonVisualComponents>
   <Properties>
