@@ -267,12 +267,19 @@ public class Promedios extends javax.swing.JFrame {
     private void mostrarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarHistoricoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int noes=0;
+        
         notas.removeAll(notas);
         for (int i = 0; i < model.getRowCount(); i++) {
             if (model.getValueAt(i, 0).toString().equals(nombreEst.getText())) {
                 nombre=model.getValueAt(i, 0).toString();
-                for (int j = 1; j <= model.getRowCount(); j++) {
-                    notas.add(model.getValueAt(i, j));
+                for (int j = 1; j < model.getColumnCount(); j++) {//cambie el for para poder pasar notas de string a double
+                    try{
+                        Double valor = Double.parseDouble(model.getValueAt(i, j).toString());
+                        notas.add(valor);
+                    }
+                    catch(NumberFormatException e){
+                         e.printStackTrace();
+                    }
                 }
             }else
                 noes++;
@@ -282,11 +289,9 @@ public class Promedios extends javax.swing.JFrame {
                 nombreEst.setText("");
             }
         }
+       Graficas.CrearGuardarGrafica(nombre, notas); //los datos viajan al main para generar la imagen
         //System.out.println(notas);
-        //System.out.println(nombre);
-        //alejo ya aca le queda el nombre del estudiante en la variable estudiante
-        //y las notas de ese estudiante en la lista notas
-        //ya es que haga esa monda de las graficas 
+        //System.out.println(nombre)
         
     }//GEN-LAST:event_mostrarHistoricoActionPerformed
 
@@ -357,6 +362,7 @@ public class Promedios extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton calcularDefinitivas;
