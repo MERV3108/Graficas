@@ -20,7 +20,7 @@ public class Graficas {
     public static void main (String [] args){
         
     }
-    public static void CrearGuardarGrafica(String nombre, LinkedList<Double> notas){
+    public static void CrearGuardarGrafica(String nombre, LinkedList<Double> notas, int guardar){
         
         // Create a simple Bar chart
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -39,7 +39,8 @@ public class Graficas {
             System.err.println("Problem occurred creating chart.");
         }
         //actualicacion de imagen
-        SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        if (guardar==1){
+            SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");
         Date Datos = new Date();
         String strDate = Formato.format(Datos);
         String GuarNombre = "D:\\ALEJO\\Documents\\Estudiante " + nombre + ".jpg";
@@ -49,6 +50,10 @@ public class Graficas {
         } catch (IOException e) {
             System.err.println("Ocurrió un problema al crear el gráfico.");
             e.printStackTrace();
+        }
+        }
+        else{
+            //nada xd
         }
 
     }

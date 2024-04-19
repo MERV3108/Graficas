@@ -25,6 +25,8 @@ public class Promedios extends javax.swing.JFrame {
     LinkedList notas = new LinkedList<>();  
     String nombre="";
     int est, not;
+    int aceptar = 1;
+    int guardar = 0;
     /**
      * Creates new form NewJFrame
      */
@@ -122,6 +124,11 @@ public class Promedios extends javax.swing.JFrame {
         });
 
         export.setText("Exportar Tabla");
+        export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -289,7 +296,7 @@ public class Promedios extends javax.swing.JFrame {
                 nombreEst.setText("");
             }
         }
-       Graficas.CrearGuardarGrafica(nombre, notas); //los datos viajan al main para generar la imagen
+       Graficas.CrearGuardarGrafica(nombre, notas,guardar); //los datos viajan al main para generar la imagen
         //System.out.println(notas);
         //System.out.println(nombre)
         
@@ -327,6 +334,11 @@ public class Promedios extends javax.swing.JFrame {
             Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_importExcActionPerformed
+
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
+    guardar = aceptar;
+    Graficas.CrearGuardarGrafica(nombre, notas,guardar);// TODO add your handling code here:
+    }//GEN-LAST:event_exportActionPerformed
     /**
      * @param args the command line arguments
      */
