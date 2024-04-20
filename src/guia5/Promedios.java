@@ -15,6 +15,9 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -59,9 +62,9 @@ public class Promedios extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         mostrarHistorico = new javax.swing.JButton();
         export = new javax.swing.JButton();
+        guardarGrafico = new javax.swing.JCheckBox();
         importExc = new javax.swing.JButton();
         calcularDefinitivas = new javax.swing.JButton();
-        guardarGrafico = new javax.swing.JCheckBox();
         GraficoTorta = new javax.swing.JButton();
         borrTab = new javax.swing.JButton();
 
@@ -77,13 +80,13 @@ public class Promedios extends javax.swing.JFrame {
                 // Aceptar todos los directorios y archivos .csv
                 return file.isDirectory() || file.getName().toLowerCase().endsWith(".csv");
             }
-        
+
             public String getDescription() {
                 // Descripción del filtro
                 return "Archivos CSV (*.csv)";
             }
         };
-        
+
         // Aplicar el filtro al JFileChooser
         datosTabla.setFileFilter(filter);
 
@@ -97,7 +100,9 @@ public class Promedios extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.setToolTipText("");
         jTable1.setColumnSelectionAllowed(true);
+        jTable1.setShowGrid(false);
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -139,6 +144,7 @@ public class Promedios extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tablaDefinitivas.setShowHorizontalLines(true);
         jScrollPane2.setViewportView(tablaDefinitivas);
 
         nombreEst.setColumns(20);
@@ -161,20 +167,32 @@ public class Promedios extends javax.swing.JFrame {
             }
         });
 
+        guardarGrafico.setText("Guardar imagen");
+        guardarGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarGraficoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mostrarHistorico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(export, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(export))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(guardarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,13 +201,15 @@ public class Promedios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(export, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(export, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(guardarGrafico)
+                .addGap(18, 18, 18))
         );
 
         importExc.setText("Importar tabla");
@@ -204,13 +224,6 @@ public class Promedios extends javax.swing.JFrame {
         calcularDefinitivas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcularDefinitivasActionPerformed(evt);
-            }
-        });
-
-        guardarGrafico.setText("Guardar imagen");
-        guardarGrafico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarGraficoActionPerformed(evt);
             }
         });
 
@@ -239,7 +252,7 @@ public class Promedios extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
-                .addGap(0, 435, Short.MAX_VALUE))
+                .addGap(0, 458, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -263,9 +276,6 @@ public class Promedios extends javax.swing.JFrame {
                                         .addComponent(importExc, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(35, 35, 35)
                                         .addComponent(borrTab, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(guardarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(calcularDefinitivas, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,9 +307,7 @@ public class Promedios extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(guardarGrafico)
-                .addGap(44, 44, 44))
+                .addGap(70, 70, 70))
         );
 
         pack();
@@ -361,8 +369,7 @@ public class Promedios extends javax.swing.JFrame {
 
     private void mostrarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarHistoricoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int noes=0;
-        
+        int noes=0;    
         notas.removeAll(notas);
         for (int i = 0; i < model.getRowCount(); i++) {
             if (model.getValueAt(i, 0).toString().equals(nombreEst.getText())) {
@@ -395,19 +402,23 @@ public class Promedios extends javax.swing.JFrame {
         JFileChooser escogerArchivo = new JFileChooser();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String linea;
-        String[] estudiantes;
+        String[] estudiantes = null;
         Boolean primera = false;
-        
-        //obtiene direccion del archivo
         int returnValue = escogerArchivo.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File archivo = escogerArchivo.getSelectedFile();
             try {
                 //ingresa archivo a tabla
-                Scanner entrada = new Scanner(archivo); // objeto para procesar información
+                Scanner entrada = new Scanner(archivo);
+                // objeto para procesar información
+                entrada.nextLine();//salta la primera linea de etiquetas
                 while (entrada.hasNext()) {
                     linea = entrada.nextLine();
-                    estudiantes = linea.split(";");
+                    if(linea.contains(";")){
+                        estudiantes = linea.split(";");
+                        System.out.println(";");
+                    }else if(linea.contains(","))
+                        estudiantes = linea.split(",");
                     if (!primera) {
                         model.addColumn("Nombre:");
                         for (int i = 1; i < estudiantes.length; i++) {
@@ -425,7 +436,32 @@ public class Promedios extends javax.swing.JFrame {
     }//GEN-LAST:event_importExcActionPerformed
 
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
-        //logica para exportar tabla de resultados
+        String userHome = System.getProperty("user.home");//obtiene direccion para guardar lo datos
+        SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");//formato de hora
+        Date Datos = new Date();//obtiene la hora
+        String strDate = Formato.format(Datos);//mete la hora en un string
+        String GuarNombre = userHome + "\\Documents\\Tabla_Resultado_ " + strDate + ".csv";//crea la direccion
+        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();//instancia el modelo de la tabla de definitivas
+        try {
+            FileWriter writer = new FileWriter(GuarNombre);//objeto para escribir
+            // Escribir los encabezados del CSV
+            for (int i = 0; i < definitivas.getColumnCount(); i++) {
+                writer.write(definitivas.getColumnName(i) + ",");
+            }
+            writer.write("\n");
+            // Escribir los datos de la tabla en el CSV
+            for (int i = 0; i < definitivas.getRowCount(); i++) {
+                for (int j = 0; j < definitivas.getColumnCount(); j++) {
+                    writer.write(definitivas.getValueAt(i, j).toString() + ",");
+                }
+                writer.write("\n");
+            }
+            writer.close();
+            System.out.println("Datos exportados exitosamente!");
+        } catch (Exception e) {
+            System.out.println("No se pudo exportar la tabla");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_exportActionPerformed
 
     private void guardarGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarGraficoActionPerformed

@@ -53,7 +53,7 @@ public class Graficas {
         double porPaso=0, porRepro=0;//porcentajes
         porPaso=(paso/total);//si necesita el numero en porcentajes multiplique por 100
         porRepro=(reprobo/total);
-        //System.out.println(porPaso);
-        //System.out.println(porRepro);
+        System.out.println(porPaso);
+        System.out.println(porRepro);
     }
 }
