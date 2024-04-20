@@ -4,11 +4,9 @@
  */
 package guia5;
 
-import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
-import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
-import com.jtattoo.plaf.luna.LunaLookAndFeel;
-import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
+import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
+import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
 import static java.lang.Integer.parseInt;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
@@ -24,11 +22,7 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.basic.BasicLookAndFeel;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.plaf.multi.MultiLookAndFeel;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-import javax.swing.plaf.synth.SynthLookAndFeel;
 
 /**
  *
@@ -603,7 +597,7 @@ public class Promedios extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    UIManager.setLookAndFeel(new NimbusLookAndFeel());
+                    UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
                 }
