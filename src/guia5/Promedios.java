@@ -4,6 +4,11 @@
  */
 package guia5;
 
+import com.jtattoo.plaf.AbstractLookAndFeel;
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
+import com.jtattoo.plaf.luna.LunaLookAndFeel;
+import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
 import static java.lang.Integer.parseInt;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +23,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.basic.BasicLookAndFeel;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.multi.MultiLookAndFeel;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 
 /**
  *
@@ -36,6 +47,7 @@ public class Promedios extends javax.swing.JFrame {
      */
     public Promedios() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -48,25 +60,29 @@ public class Promedios extends javax.swing.JFrame {
     private void initComponents() {
 
         datosTabla = new javax.swing.JFileChooser();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        crearTabla = new javax.swing.JButton();
-        numeroEst = new javax.swing.JTextArea();
+        GraficoTorta = new javax.swing.JButton();
         numeroNot = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        crearTabla = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDefinitivas = new javax.swing.JTable();
+        importExc = new javax.swing.JButton();
+        numeroEst = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        borrTab = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        calcularDefinitivas = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         nombreEst = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         mostrarHistorico = new javax.swing.JButton();
         export = new javax.swing.JButton();
         guardarGrafico = new javax.swing.JCheckBox();
-        importExc = new javax.swing.JButton();
-        calcularDefinitivas = new javax.swing.JButton();
-        GraficoTorta = new javax.swing.JButton();
-        borrTab = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        Salir = new javax.swing.JButton();
 
         datosTabla.setBackground(java.awt.Color.lightGray);
         try {
@@ -91,24 +107,24 @@ public class Promedios extends javax.swing.JFrame {
         datosTabla.setFileFilter(filter);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jTable1.setToolTipText("");
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.setShowGrid(false);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
-        jLabel1.setText("Cantidad de estudiantes: ");
+        jPanel2.setOpaque(false);
 
         jLabel2.setText("Cantidad de notas: ");
+
+        GraficoTorta.setText("Mostrar taza de mortalidad");
+        GraficoTorta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        GraficoTorta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GraficoTortaActionPerformed(evt);
+            }
+        });
+
+        numeroNot.setColumns(20);
+        numeroNot.setRows(5);
+
+        jLabel1.setText("Cantidad de estudiantes: ");
 
         crearTabla.setText("Crear Tabla");
         crearTabla.addActionListener(new java.awt.event.ActionListener() {
@@ -121,12 +137,6 @@ public class Promedios extends javax.swing.JFrame {
                 crearTablaKeyPressed(evt);
             }
         });
-
-        numeroEst.setColumns(20);
-        numeroEst.setRows(5);
-
-        numeroNot.setColumns(20);
-        numeroNot.setRows(5);
 
         tablaDefinitivas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,6 +157,51 @@ public class Promedios extends javax.swing.JFrame {
         tablaDefinitivas.setShowHorizontalLines(true);
         jScrollPane2.setViewportView(tablaDefinitivas);
 
+        importExc.setText("Importar tabla");
+        importExc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importExcActionPerformed(evt);
+            }
+        });
+
+        numeroEst.setColumns(20);
+        numeroEst.setRows(5);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.setToolTipText("");
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setShowGrid(false);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        borrTab.setText("Borrar tablas");
+        borrTab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrTabActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 18)); // NOI18N
+        jLabel4.setText("Calculos Notas");
+
+        calcularDefinitivas.setText("Calcular Definitivas");
+        calcularDefinitivas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        calcularDefinitivas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcularDefinitivasActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 255));
+        jPanel1.setOpaque(false);
+
         nombreEst.setColumns(20);
         nombreEst.setRows(5);
         nombreEst.setToolTipText("Nombre estudiante");
@@ -160,7 +215,7 @@ public class Promedios extends javax.swing.JFrame {
             }
         });
 
-        export.setText("Exportar Tabla");
+        export.setText("Exportar Tablas");
         export.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportActionPerformed(evt);
@@ -188,16 +243,16 @@ public class Promedios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(export))
+                        .addComponent(export, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(guardarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -212,33 +267,86 @@ public class Promedios extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        importExc.setText("Importar tabla");
-        importExc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importExcActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(crearTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(numeroEst, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(importExc, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(borrTab, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(calcularDefinitivas, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(GraficoTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4)))
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(numeroEst, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(crearTabla)
+                    .addComponent(importExc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(borrTab))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GraficoTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(calcularDefinitivas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-        calcularDefinitivas.setText("Calcular Definitivas");
-        calcularDefinitivas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        calcularDefinitivas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcularDefinitivasActionPerformed(evt);
-            }
-        });
+        jLabel7.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 18)); // NOI18N
+        jLabel7.setText("Historico:");
 
-        GraficoTorta.setText("Mostrar taza de mortalidad");
-        GraficoTorta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        GraficoTorta.addActionListener(new java.awt.event.ActionListener() {
+        Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GraficoTortaActionPerformed(evt);
-            }
-        });
-
-        borrTab.setText("Borrar tablas");
-        borrTab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                borrTabActionPerformed(evt);
+                SalirActionPerformed(evt);
             }
         });
 
@@ -247,129 +355,81 @@ public class Promedios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addGap(0, 458, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(crearTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(numeroEst, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(39, 39, 39)
-                                        .addComponent(importExc, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(borrTab, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(calcularDefinitivas, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(GraficoTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addContainerGap(412, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(numeroEst, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearTabla)
-                    .addComponent(importExc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(borrTab))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(calcularDefinitivas)
-                    .addComponent(GraficoTorta))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addGap(368, 368, 368)
+                .addComponent(jLabel7)
+                .addGap(324, 324, 324)
+                .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void crearTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearTablaActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        try{
-        int est, not;
-        est = parseInt(numeroEst.getText());
-        not = parseInt(numeroNot.getText());
-        model.addColumn("Nombre");
-        model.setRowCount(est);
-        for (int i = 1; i < not+1; i++) {
-            model.addColumn("Nota:" + i);
-        }
-        }catch(Exception e){
-            System.err.println("Hubo un problema al crear la tabla");
-            numeroEst.setText("");
-            numeroNot.setText("");
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_crearTablaActionPerformed
+    private void guardarGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarGraficoActionPerformed
 
-    private void calcularDefinitivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularDefinitivasActionPerformed
+    }//GEN-LAST:event_guardarGraficoActionPerformed
+
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
+        String userHome = System.getProperty("user.home");//obtiene direccion para guardar lo datos
+        SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");//formato de hora
+        Date Datos = new Date();//obtiene la hora
+        String strDate = Formato.format(Datos);//mete la hora en un string
+        String GuarNombre = userHome + "\\Documents\\Tabla_Resultados_ " + strDate + ".csv";//crea la direccion
+        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();//instancia el modelo de la tabla de definitivas
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();
-        try{
-        for (int i = 0; i < model.getRowCount(); i++) {
-            double suma=0;
-            String nombre = model.getValueAt(i, 0).toString();
-            //obtiene los datos y calcula la definitiva para ponerla en la tabla
-            for (int j = 1; j < model.getColumnCount(); j++) {
-                double nota; 
-                nota = Double.parseDouble(model.getValueAt(i, j).toString());
-                if(nota<=5)
-                    suma += nota;
-                else
-                    throw new Exception("La nota ingresada es invalida");
+        try {
+            FileWriter writer = new FileWriter(GuarNombre);//objeto para escribir
+            //guarda la primera tabla
+            // Escribir los encabezados del CSV
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                writer.write(model.getColumnName(i) + ",");
             }
-            double definitiva = suma / (model.getColumnCount()-1);
-            String paso;
-            if (definitiva >= 3.0) {
-                paso="APROBO";
-                aprobo++;
-            }else{
-                paso="REPROBO";    
-                reprobo++;
-            } 
-            definitivas.addRow(new Object[]{nombre, definitiva, paso});
-            totEst=model.getRowCount();
-        }
-        }catch(Exception e){
-            System.err.println("Hubo un problema al calcular definitivas");
+            writer.write("\n");
+            // Escribir los datos de la tabla en el CSV
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    writer.write(model.getValueAt(i, j).toString() + ",");
+                }
+                writer.write("\n");
+            }
+            writer.write("\n");
+            //guarda los datos de la segunda tabla
+            // Escribir los encabezados del CSV
+            for (int i = 0; i < definitivas.getColumnCount(); i++) {
+                writer.write(definitivas.getColumnName(i) + ",");
+            }
+            writer.write("\n");
+            // Escribir los datos de la tabla en el CSV
+            for (int i = 0; i < definitivas.getRowCount(); i++) {
+                for (int j = 0; j < definitivas.getColumnCount(); j++) {
+                    writer.write(definitivas.getValueAt(i, j).toString() + ",");
+                }
+                writer.write("\n");
+            }
+            writer.close();
+            System.out.println("Datos exportados exitosamente en " + GuarNombre);
+        } catch (Exception e) {
+            System.out.println("No se pudo exportar la tabla");
             e.printStackTrace();
-            borrTabActionPerformed(evt);
         }
-    }//GEN-LAST:event_calcularDefinitivasActionPerformed
+    }//GEN-LAST:event_exportActionPerformed
 
     private void mostrarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarHistoricoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int noes=0;    
+        int noes=0;
         notas.removeAll(notas);
         for (int i = 0; i < model.getRowCount(); i++) {
             if (model.getValueAt(i, 0).toString().equals(nombreEst.getText())) {
@@ -385,18 +445,64 @@ public class Promedios extends javax.swing.JFrame {
                     }
                 }
             }else
-                noes++;
+            noes++;
             if (noes==model.getRowCount()) {
                 MensajeError menErr = new MensajeError(this, true);
                 menErr.setVisible(true);
                 nombreEst.setText("");
             }
         }
-       Graficas.CrearGuardarGrafica(nombre, notas,guardarGrafico.isSelected()); //los datos viajan al main para generar la imagen
+        Graficas.CrearGuardarGrafica(nombre, notas,guardarGrafico.isSelected()); //los datos viajan al main para generar la imagen
         //System.out.println(notas);
         //System.out.println(nombre)
-        
     }//GEN-LAST:event_mostrarHistoricoActionPerformed
+
+    private void calcularDefinitivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularDefinitivasActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();
+        try{
+            for (int i = 0; i < model.getRowCount(); i++) {
+                double suma=0;
+                String nombre = model.getValueAt(i, 0).toString();
+                //obtiene los datos y calcula la definitiva para ponerla en la tabla
+                for (int j = 1; j < model.getColumnCount(); j++) {
+                    double nota;
+                    nota = Double.parseDouble(model.getValueAt(i, j).toString());
+                    if(nota<=5)
+                    suma += nota;
+                    else
+                    throw new Exception("La nota ingresada es invalida");
+                }
+                double definitiva = suma / (model.getColumnCount()-1);
+                String paso;
+                if (definitiva >= 3.0) {
+                    paso="APROBO";
+                    aprobo++;
+                }else{
+                    paso="REPROBO";
+                    reprobo++;
+                }
+                definitivas.addRow(new Object[]{nombre, definitiva, paso});
+                totEst=model.getRowCount();
+            }
+        }catch(Exception e){
+            System.err.println("Hubo un problema al calcular definitivas");
+            e.printStackTrace();
+            borrTabActionPerformed(evt);
+        }
+    }//GEN-LAST:event_calcularDefinitivasActionPerformed
+
+    private void borrTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrTabActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        definitivas.setRowCount(0);
+        aprobo=0;
+        reprobo=0;
+        numeroEst.setText("");
+        numeroNot.setText("");
+    }//GEN-LAST:event_borrTabActionPerformed
 
     private void importExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importExcActionPerformed
         JFileChooser escogerArchivo = new JFileChooser();
@@ -418,7 +524,7 @@ public class Promedios extends javax.swing.JFrame {
                         estudiantes = linea.split(";");
                         System.out.println(";");
                     }else if(linea.contains(","))
-                        estudiantes = linea.split(",");
+                    estudiantes = linea.split(",");
                     if (!primera) {
                         model.addColumn("Nombre:");
                         for (int i = 1; i < estudiantes.length; i++) {
@@ -435,58 +541,36 @@ public class Promedios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_importExcActionPerformed
 
-    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
-        String userHome = System.getProperty("user.home");//obtiene direccion para guardar lo datos
-        SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");//formato de hora
-        Date Datos = new Date();//obtiene la hora
-        String strDate = Formato.format(Datos);//mete la hora en un string
-        String GuarNombre = userHome + "\\Documents\\Tabla_Resultado_ " + strDate + ".csv";//crea la direccion
-        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();//instancia el modelo de la tabla de definitivas
-        try {
-            FileWriter writer = new FileWriter(GuarNombre);//objeto para escribir
-            // Escribir los encabezados del CSV
-            for (int i = 0; i < definitivas.getColumnCount(); i++) {
-                writer.write(definitivas.getColumnName(i) + ",");
+    private void crearTablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_crearTablaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearTablaKeyPressed
+
+    private void crearTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearTablaActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        try{
+            int est, not;
+            est = parseInt(numeroEst.getText());
+            not = parseInt(numeroNot.getText());
+            model.addColumn("Nombre");
+            model.setRowCount(est);
+            for (int i = 1; i < not+1; i++) {
+                model.addColumn("Nota:" + i);
             }
-            writer.write("\n");
-            // Escribir los datos de la tabla en el CSV
-            for (int i = 0; i < definitivas.getRowCount(); i++) {
-                for (int j = 0; j < definitivas.getColumnCount(); j++) {
-                    writer.write(definitivas.getValueAt(i, j).toString() + ",");
-                }
-                writer.write("\n");
-            }
-            writer.close();
-            System.out.println("Datos exportados exitosamente!");
-        } catch (Exception e) {
-            System.out.println("No se pudo exportar la tabla");
+        }catch(Exception e){
+            System.err.println("Hubo un problema al crear la tabla");
+            numeroEst.setText("");
+            numeroNot.setText("");
             e.printStackTrace();
         }
-    }//GEN-LAST:event_exportActionPerformed
-
-    private void guardarGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarGraficoActionPerformed
-        
-    }//GEN-LAST:event_guardarGraficoActionPerformed
+    }//GEN-LAST:event_crearTablaActionPerformed
 
     private void GraficoTortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficoTortaActionPerformed
         Graficas.torta(aprobo, reprobo, totEst);
     }//GEN-LAST:event_GraficoTortaActionPerformed
 
-    private void borrTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrTabActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel definitivas = (DefaultTableModel) tablaDefinitivas.getModel();
-        model.setRowCount(0);
-        model.setColumnCount(0);
-        definitivas.setRowCount(0);
-        aprobo=0;
-        reprobo=0;
-        numeroEst.setText("");
-        numeroNot.setText("");
-    }//GEN-LAST:event_borrTabActionPerformed
-
-    private void crearTablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_crearTablaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_crearTablaKeyPressed
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_SalirActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -518,6 +602,11 @@ public class Promedios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(new NimbusLookAndFeel());
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new Promedios().setVisible(true);
             }
         });
@@ -526,6 +615,7 @@ public class Promedios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GraficoTorta;
+    private javax.swing.JButton Salir;
     private javax.swing.JButton borrTab;
     private javax.swing.JButton calcularDefinitivas;
     private javax.swing.JButton crearTabla;
@@ -536,7 +626,10 @@ public class Promedios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
