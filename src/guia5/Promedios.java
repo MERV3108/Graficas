@@ -6,8 +6,6 @@ package guia5;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 
-import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
-import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
 import static java.lang.Integer.parseInt;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
@@ -23,9 +21,7 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 /**
  *
@@ -61,12 +57,12 @@ public class Promedios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         GraficoTorta = new javax.swing.JButton();
         numeroNot = new javax.swing.JTextArea();
+        numeroEst = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         crearTabla = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDefinitivas = new javax.swing.JTable();
         importExc = new javax.swing.JButton();
-        numeroEst = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         borrTab = new javax.swing.JButton();
@@ -78,9 +74,11 @@ public class Promedios extends javax.swing.JFrame {
         mostrarHistorico = new javax.swing.JButton();
         export = new javax.swing.JButton();
         guardarGrafico = new javax.swing.JCheckBox();
-        Salir = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        Salir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         datosTabla.setBackground(java.awt.Color.lightGray);
         try {
@@ -108,23 +106,62 @@ public class Promedios extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel2.setOpaque(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cantidad de notas: ");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, 20));
 
+        GraficoTorta.setBackground(new java.awt.Color(0, 0, 102));
+        GraficoTorta.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        GraficoTorta.setForeground(new java.awt.Color(255, 255, 255));
         GraficoTorta.setText("Mostrar taza de mortalidad");
+        GraficoTorta.setBorder(null);
+        GraficoTorta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         GraficoTorta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         GraficoTorta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GraficoTortaActionPerformed(evt);
             }
         });
+        jPanel2.add(GraficoTorta, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 319, 189, 40));
 
+        numeroNot.setBackground(new java.awt.Color(51, 51, 51));
         numeroNot.setColumns(20);
-        numeroNot.setRows(5);
+        numeroNot.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 12)); // NOI18N
+        numeroNot.setForeground(new java.awt.Color(255, 255, 255));
+        numeroNot.setLineWrap(true);
+        numeroNot.setRows(1);
+        numeroNot.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        numeroNot.setCaretColor(new java.awt.Color(255, 255, 255));
+        numeroNot.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jPanel2.add(numeroNot, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 81, 20));
 
+        numeroEst.setBackground(new java.awt.Color(51, 51, 51));
+        numeroEst.setColumns(20);
+        numeroEst.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 12)); // NOI18N
+        numeroEst.setForeground(new java.awt.Color(255, 255, 255));
+        numeroEst.setLineWrap(true);
+        numeroEst.setRows(1);
+        numeroEst.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        numeroEst.setCaretColor(new java.awt.Color(255, 255, 255));
+        numeroEst.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        numeroEst.setDragEnabled(true);
+        numeroEst.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jPanel2.add(numeroEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 81, 20));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cantidad de estudiantes: ");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
 
+        crearTabla.setBackground(new java.awt.Color(0, 0, 102));
+        crearTabla.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        crearTabla.setForeground(new java.awt.Color(255, 204, 255));
         crearTabla.setText("Crear Tabla");
+        crearTabla.setBorder(null);
+        crearTabla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         crearTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crearTablaActionPerformed(evt);
@@ -135,7 +172,12 @@ public class Promedios extends javax.swing.JFrame {
                 crearTablaKeyPressed(evt);
             }
         });
+        jPanel2.add(crearTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, 30));
 
+        tablaDefinitivas.setBackground(new java.awt.Color(51, 51, 51));
+        tablaDefinitivas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tablaDefinitivas.setFont(new java.awt.Font("Hack Nerd Font Mono", 1, 12)); // NOI18N
+        tablaDefinitivas.setForeground(new java.awt.Color(255, 255, 255));
         tablaDefinitivas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -152,19 +194,37 @@ public class Promedios extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tablaDefinitivas.setCellSelectionEnabled(true);
+        tablaDefinitivas.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        tablaDefinitivas.setFillsViewportHeight(true);
+        tablaDefinitivas.setSelectionBackground(new java.awt.Color(51, 0, 102));
+        tablaDefinitivas.setSelectionForeground(new java.awt.Color(102, 255, 255));
+        tablaDefinitivas.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        tablaDefinitivas.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        tablaDefinitivas.setShowGrid(true);
         tablaDefinitivas.setShowHorizontalLines(true);
+        tablaDefinitivas.setShowVerticalLines(false);
         jScrollPane2.setViewportView(tablaDefinitivas);
 
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 377, 486, 196));
+
+        importExc.setBackground(new java.awt.Color(0, 0, 102));
+        importExc.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        importExc.setForeground(new java.awt.Color(255, 204, 255));
         importExc.setText("Importar tabla");
+        importExc.setBorder(null);
+        importExc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         importExc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importExcActionPerformed(evt);
             }
         });
+        jPanel2.add(importExc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 119, 30));
 
-        numeroEst.setColumns(20);
-        numeroEst.setRows(5);
-
+        jTable1.setBackground(new java.awt.Color(51, 51, 51));
+        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTable1.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 12)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -175,207 +235,145 @@ public class Promedios extends javax.swing.JFrame {
         ));
         jTable1.setToolTipText("");
         jTable1.setColumnSelectionAllowed(true);
-        jTable1.setShowGrid(false);
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        jTable1.setFillsViewportHeight(true);
+        jTable1.setSelectionBackground(new java.awt.Color(51, 0, 102));
+        jTable1.setSelectionForeground(new java.awt.Color(51, 255, 255));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        borrTab.setText("Borrar tablas");
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 139, 492, 162));
+
+        borrTab.setBackground(new java.awt.Color(102, 0, 51));
+        borrTab.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        borrTab.setForeground(new java.awt.Color(255, 204, 255));
+        borrTab.setText("Borrar datos");
+        borrTab.setBorder(null);
+        borrTab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         borrTab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrTabActionPerformed(evt);
             }
         });
+        jPanel2.add(borrTab, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 121, 30));
 
-        jLabel4.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Hack Nerd Font Propo", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 255, 255));
         jLabel4.setText("Calculos Notas");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 15, -1, -1));
 
+        calcularDefinitivas.setBackground(new java.awt.Color(0, 0, 102));
+        calcularDefinitivas.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        calcularDefinitivas.setForeground(new java.awt.Color(255, 255, 255));
         calcularDefinitivas.setText("Calcular Definitivas");
+        calcularDefinitivas.setBorder(null);
+        calcularDefinitivas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         calcularDefinitivas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         calcularDefinitivas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcularDefinitivasActionPerformed(evt);
             }
         });
+        jPanel2.add(calcularDefinitivas, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 319, 189, 40));
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 255));
         jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        nombreEst.setBackground(new java.awt.Color(51, 51, 51));
         nombreEst.setColumns(20);
+        nombreEst.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        nombreEst.setForeground(new java.awt.Color(255, 255, 255));
         nombreEst.setRows(5);
         nombreEst.setToolTipText("Nombre estudiante");
+        nombreEst.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        nombreEst.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel1.add(nombreEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 28, 201, 31));
 
+        jLabel3.setFont(new java.awt.Font("Hack Nerd Font Propo", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre estudiante:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 6, -1, -1));
 
+        mostrarHistorico.setBackground(new java.awt.Color(102, 0, 153));
+        mostrarHistorico.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
+        mostrarHistorico.setForeground(new java.awt.Color(255, 255, 255));
         mostrarHistorico.setText("Mostrar Historico");
+        mostrarHistorico.setBorder(null);
+        mostrarHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mostrarHistorico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarHistoricoActionPerformed(evt);
             }
         });
+        jPanel1.add(mostrarHistorico, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 110, 40));
 
+        export.setBackground(new java.awt.Color(83, 209, 19));
+        export.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        export.setForeground(new java.awt.Color(0, 51, 51));
         export.setText("Exportar Tablas");
+        export.setBorder(null);
+        export.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         export.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportActionPerformed(evt);
             }
         });
+        jPanel1.add(export, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 17, 127, 48));
 
+        guardarGrafico.setBackground(new java.awt.Color(1, 0, 96));
+        guardarGrafico.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
+        guardarGrafico.setForeground(new java.awt.Color(255, 255, 255));
         guardarGrafico.setText("Guardar imagen");
+        guardarGrafico.setBorder(null);
+        guardarGrafico.setHideActionText(true);
         guardarGrafico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarGraficoActionPerformed(evt);
             }
         });
+        jPanel1.add(guardarGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 120, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(export, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(guardarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreEst, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(export, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(guardarGrafico)
-                .addGap(18, 18, 18))
-        );
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 585, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(crearTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(numeroEst, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(importExc, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(borrTab, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(calcularDefinitivas, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(GraficoTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4)))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(numeroEst, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numeroNot, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearTabla)
-                    .addComponent(importExc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(borrTab))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GraficoTorta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calcularDefinitivas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel3.setOpaque(false);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel5.setPreferredSize(new java.awt.Dimension(500, 300));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        Salir.setBackground(new java.awt.Color(191, 36, 57));
+        Salir.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 14)); // NOI18N
+        Salir.setForeground(new java.awt.Color(255, 255, 255));
         Salir.setText("Salir");
+        Salir.setBorder(null);
+        Salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SalirActionPerformed(evt);
             }
         });
-
-        jLabel5.setPreferredSize(new java.awt.Dimension(500, 300));
+        jPanel3.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 640, 110, 37));
 
         jLabel6.setPreferredSize(new java.awt.Dimension(500, 300));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 530, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guia5/imagenes/13167.jpg"))); // NOI18N
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 1080, 704));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(721, 721, 721)
-                .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -433,35 +431,34 @@ public class Promedios extends javax.swing.JFrame {
 
     private void mostrarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarHistoricoActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int noes=0;
+        int noes = 0;
         notas.removeAll(notas);
         for (int i = 0; i < model.getRowCount(); i++) {
             if (model.getValueAt(i, 0).toString().equals(nombreEst.getText())) {
-                nombre=model.getValueAt(i, 0).toString();
+                nombre = model.getValueAt(i, 0).toString();
                 for (int j = 1; j < model.getColumnCount(); j++) {//cambie el for para poder pasar notas de string a double
-                    try{
+                    try {
                         Double valor = Double.valueOf(model.getValueAt(i, j).toString());
                         notas.add(valor);
-                    }
-                    catch(NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         System.err.println("Error al pasar datos");
                         e.printStackTrace();
                     }
                 }
-            }else
-            noes++;
-            if (noes==model.getRowCount()) {
-                MensajeError menErr = new MensajeError(this, true);
-                menErr.setVisible(true);
-                nombreEst.setText("");
+            } else {
+                noes++;
             }
         }
-        Graficas.CrearGuardarGrafica(nombre, notas,guardarGrafico.isSelected()); //los datos viajan al main para generar la imagen
-        ImageIcon ImagenEstudiante = new ImageIcon("D:\\ALEJO\\Documents\\Estudiante.jpg");
-//        ImageIcon ImagenEstudiante = new ImageIcon("");
-//ponga su direccion para guardar las imagenes y pone mi direccion en comentarios
-        ImagenEstudiante.getImage().flush();
-        this.jLabel6.setIcon(ImagenEstudiante);
+        if (noes == model.getRowCount()) {
+            MensajeError menErr = new MensajeError(this, true);
+            menErr.setVisible(true);
+            nombreEst.setText("");
+        }else{
+            Graficas.CrearGuardarGrafica(nombre, notas, guardarGrafico.isSelected()); //los datos viajan al main para generar la imagen
+            ImageIcon ImagenEstudiante = new ImageIcon("src/guia5/imagenes/Estudiante.jpg");
+            ImagenEstudiante.getImage().flush();
+            this.jLabel6.setIcon(ImagenEstudiante);
+        }
     }//GEN-LAST:event_mostrarHistoricoActionPerformed
 
     private void calcularDefinitivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularDefinitivasActionPerformed
@@ -509,6 +506,9 @@ public class Promedios extends javax.swing.JFrame {
         reprobo=0;
         numeroEst.setText("");
         numeroNot.setText("");
+        jLabel5.setIcon(null);
+        jLabel6.setIcon(null);
+        
     }//GEN-LAST:event_borrTabActionPerformed
 
     private void importExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importExcActionPerformed
@@ -573,9 +573,10 @@ public class Promedios extends javax.swing.JFrame {
 
     private void GraficoTortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficoTortaActionPerformed
         Graficas.torta(aprobo, reprobo, totEst);
-        ImageIcon ImagenTorta = new ImageIcon("D:\\ALEJO\\Documents\\TORTA.jpg");
+        ImageIcon ImagenTorta = new ImageIcon("src/guia5/imagenes/TORTA.jpg");
 //        ImageIcon ImagenTorta = new ImageIcon("");
-//ponga su direccion para guardar las imagenes y pone mi direccion en comentarios
+//        ponga su direccion para guardar las imagenes y pone mi direccion en comentarios
+//        O MEJOR LO DEJA DENTRO DE LAS IMAGENES DEL PROYECTO PARA QUE SEA UNIVERSAL es decir esa ubicacion (con amor)
         ImagenTorta.getImage().flush();
         this.jLabel5.setIcon(ImagenTorta);
     }//GEN-LAST:event_GraficoTortaActionPerformed
@@ -645,8 +646,10 @@ public class Promedios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

@@ -28,7 +28,7 @@ public class Graficas {
         false, true, false);
 
         try {
-            ChartUtilities.saveChartAsJPEG(new File("D:\\ALEJO\\Documents\\Estudiante.jpg"), chart, 500, 300);
+            ChartUtilities.saveChartAsJPEG(new File("src/guia5/imagenes/Estudiante.jpg"), chart, 500, 300);
         } 
         catch (IOException e) {
             System.err.println("Hubo un problema al generar la grafica.");
@@ -40,7 +40,7 @@ public class Graficas {
             SimpleDateFormat Formato = new SimpleDateFormat("yyyyMMdd_HHmmss");
             Date Datos = new Date();
             String strDate = Formato.format(Datos);
-            String GuarNombre = userHome + "D:\\ALEJO\\Documents\\Estudiante " + nombre + strDate + ".jpg";
+            String GuarNombre = userHome + "\\Documents\\Estudiante " + nombre + strDate + ".jpg";
             try {
                 ChartUtilities.saveChartAsJPEG(new File(GuarNombre), chart, 500, 300);
                 System.out.println("Gráfico guardado como: " + GuarNombre);
@@ -68,13 +68,11 @@ public class Graficas {
         false // Configure chart to generate URLs?
         );
         try {
-            ChartUtilities.saveChartAsJPEG(new File("D:\\ALEJO\\Documents\\TORTA.jpg"), chart, 500, 300);
-//            ChartUtilities.saveChartAsJPEG(new File(""), chart, 500, 300);
-//ponga su direccion para guardar las imagenes y pone mi direccion en comentarios
-            
+            ChartUtilities.saveChartAsJPEG(new File("src/guia5/imagenes/TORTA.jpg"), chart, 500, 300);
         } 
         catch (Exception e) {
             System.out.println("Problem occurred creating chart.");
+            e.printStackTrace();
         }
     }
 }
