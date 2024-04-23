@@ -5,6 +5,7 @@
 package guia5;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+
 import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
 import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
 import static java.lang.Integer.parseInt;
@@ -21,6 +22,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
@@ -75,8 +78,9 @@ public class Promedios extends javax.swing.JFrame {
         mostrarHistorico = new javax.swing.JButton();
         export = new javax.swing.JButton();
         guardarGrafico = new javax.swing.JCheckBox();
-        jLabel7 = new javax.swing.JLabel();
         Salir = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         datosTabla.setBackground(java.awt.Color.lightGray);
         try {
@@ -256,7 +260,6 @@ public class Promedios extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(mostrarHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(export, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(guardarGrafico)
                 .addGap(18, 18, 18))
         );
@@ -334,9 +337,6 @@ public class Promedios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel7.setFont(new java.awt.Font("Hack Nerd Font Propo", 0, 18)); // NOI18N
-        jLabel7.setText("Historico:");
-
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,26 +344,36 @@ public class Promedios extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setPreferredSize(new java.awt.Dimension(500, 300));
+
+        jLabel6.setPreferredSize(new java.awt.Dimension(500, 300));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addContainerGap(412, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(368, 368, 368)
-                .addComponent(jLabel7)
-                .addGap(324, 324, 324)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(721, 721, 721)
                 .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -447,8 +457,11 @@ public class Promedios extends javax.swing.JFrame {
             }
         }
         Graficas.CrearGuardarGrafica(nombre, notas,guardarGrafico.isSelected()); //los datos viajan al main para generar la imagen
-        //System.out.println(notas);
-        //System.out.println(nombre)
+        ImageIcon ImagenEstudiante = new ImageIcon("D:\\ALEJO\\Documents\\Estudiante.jpg");
+//        ImageIcon ImagenEstudiante = new ImageIcon("");
+//ponga su direccion para guardar las imagenes y pone mi direccion en comentarios
+        ImagenEstudiante.getImage().flush();
+        this.jLabel6.setIcon(ImagenEstudiante);
     }//GEN-LAST:event_mostrarHistoricoActionPerformed
 
     private void calcularDefinitivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularDefinitivasActionPerformed
@@ -560,6 +573,11 @@ public class Promedios extends javax.swing.JFrame {
 
     private void GraficoTortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficoTortaActionPerformed
         Graficas.torta(aprobo, reprobo, totEst);
+        ImageIcon ImagenTorta = new ImageIcon("D:\\ALEJO\\Documents\\TORTA.jpg");
+//        ImageIcon ImagenTorta = new ImageIcon("");
+//ponga su direccion para guardar las imagenes y pone mi direccion en comentarios
+        ImagenTorta.getImage().flush();
+        this.jLabel5.setIcon(ImagenTorta);
     }//GEN-LAST:event_GraficoTortaActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
@@ -569,6 +587,7 @@ public class Promedios extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        boolean nimbusSet = false;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -578,6 +597,7 @@ public class Promedios extends javax.swing.JFrame {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    
                     break;
                 }
             }
@@ -592,17 +612,19 @@ public class Promedios extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            if (!nimbusSet) {
                 try {
                     UIManager.setLookAndFeel(new AcrylLookAndFeel());
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(Promedios.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                new Promedios().setVisible(true);
             }
+            new Promedios().setVisible(true);
+        }
         });
     }
     
@@ -621,7 +643,8 @@ public class Promedios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -633,4 +656,10 @@ public class Promedios extends javax.swing.JFrame {
     private javax.swing.JTextArea numeroNot;
     private javax.swing.JTable tablaDefinitivas;
     // End of variables declaration//GEN-END:variables
+
+    private static class JLabel5 {
+
+        public JLabel5() {
+        }
+    }
 }
